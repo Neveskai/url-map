@@ -1,17 +1,15 @@
 <template>
-	<section>
+	<section id="app">
+		<header-vue title="URL SHORTENER"></header-vue>
 		<div id="bgapp"></div>
-		<router-view v-if="user.id != undefined" style="z-index: 2;"></router-view>
-		<user-auth v-else></user-auth>
+		<router-view></router-view>
 	</section>
 </template>
 <script>
-	import userAuth from './components/logscreen.vue';
-	import userService from './services/user.service.js';
-
+	import headerVue from './components/menus/header.vue';
 	export default {
 		components: {
-			'userAuth' : userAuth
+			'headerVue': headerVue
 		},
 		computed: {
 			user: {
@@ -29,16 +27,6 @@
 			api_dir() { return this.$store.state.api_dir; }
 		},
 		methods: {
-			userAuth(login, senha) {
-				const url = this.api_dir+'/user/auth';
-				userService.userAuth(url, login, senha);
-			},
-			logout(){
-				userService.logout();
-			},
-			createUser(arr){
-				userService.createUser(arr)
-			},
 			goBack(){
 				if(window.history.length == 0){
 					this.$router.push({ path: 'home' });
@@ -51,7 +39,7 @@
 </script>
 <style scoped>
 	#bgapp {
-		background: linear-gradient(-15deg, #00a25b, #00d99d);
+		background: linear-gradient(-15deg, #ccc, #f9f9f9);
 		opacity: 1; 
 		position: fixed;
 		width: 100vw; 
@@ -59,6 +47,10 @@
 		z-index: -1; 
 		left: 0;
 		top: 0;
+	}
+	#app { 
+		width: 100%;
+		height: 100vh;
 	}
 	section { padding: 0px; }
 </style>

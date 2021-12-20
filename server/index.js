@@ -1,9 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const UserService = require('./src/services/user/UserService');
 const JDO = require('./src/services/mysql/jobsadmin.js');
-
 const app = express(); 
 app.set('JDO', JDO);
+app.use(cors())
 
 var userService = new UserService(app);
 

@@ -1,9 +1,10 @@
 export function put(url, object){
 	var p = fetch(url, {
-		method: 'POST',
+		method: 'PUT',
+		mode: 'cors',
 		headers: {
 			'X-Http-Method-Override': 'PUT', 
-			'Content-Type': 'application/json' 
+			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify(object)
 	})

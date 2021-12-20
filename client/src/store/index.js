@@ -6,6 +6,17 @@ export default createStore({
 		reqs: {
 			login: null
 		},
+		tabletop100: {
+			id: 'tabletop100',
+			title: 'Top 100',
+			subtitle: '',
+			data: [],
+		},
+		userform: {
+			name: '',
+			email: '',
+			keyword: ''
+		},
 		api_dir: 'http://localhost:3001/api/v1'
 	},
 	mutations: {
