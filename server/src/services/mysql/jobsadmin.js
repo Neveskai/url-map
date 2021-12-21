@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 var JDO = mysql.createConnection({
-	host    : 'http://localhost/phpmyadmin/',
+	host    : '127.0.0.1',
 	user    : 'root',
 	password: '',
 	database: 'urlshorter'

@@ -6,29 +6,28 @@
 		<div class="col-md-9 text-md-right col-12 text-center p-0 m-md-0">
 			<section class="d-inline-flex pl-1">
 				<div class="mr-2 mr-md-4 navi text-center">
-					<router-link to="/">
-						<i class="fa fa-home"></i><br>
-						<span class="font-bold">Home</span>
-					</router-link>
-				</div>
-				<div class="mr-2 mr-md-4 navi text-center">
 					<router-link to="top100">
 						<i class="fa fa-link"></i><br>
 						<span class="font-bold">Top 100</span>
 					</router-link>
 				</div>
 				<div class="mr-2 mr-md-4 navi text-center">
-					<router-link to="login">
-						<i class="fa fa-user"></i><br>
-						<span class="font-bold">Login</span>
+					<router-link to="/">
+						<i class="fa fa-home"></i><br>
+						<span class="font-bold">Home</span>
 					</router-link>
 				</div>
+				<user-btn class="ml-md-4"></user-btn>
 			</section>
 		</div>
 	</header>
 </template>
 <script>
-	module.exports = {
+	import userBtn from './../user-btn/user-btn.vue';
+	export default {
+		components: {
+			'userBtn': userBtn
+		},
 		props: {
 			title: String
 		},

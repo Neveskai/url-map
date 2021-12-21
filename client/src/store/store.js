@@ -2,7 +2,10 @@ import { createStore } from 'vuex'
 
 export default createStore({
 	state: {
-		user: {},
+		user: {
+			id: 0,
+			name: '',
+		},
 		reqs: {
 			login: null
 		},
@@ -14,6 +17,7 @@ export default createStore({
 		},
 		userform: {
 			name: '',
+			login: '',
 			email: '',
 			keyword: ''
 		},

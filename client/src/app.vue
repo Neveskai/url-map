@@ -10,30 +10,6 @@
 	export default {
 		components: {
 			'headerVue': headerVue
-		},
-		computed: {
-			user: {
-				get()	{ return this.$store.state.user; },
-				set(obj){ 
-					this.$store.commit('setObject', { target: 'user', data: obj }); 
-				}
-			},
-			reqs: {
-				get() { return this.$store.state.reqs; },
-				set(arr)	{ 
-					this.$store.commit('setArray', { target:'reqs', data: arr }); 
-				}
-			},
-			api_dir() { return this.$store.state.api_dir; }
-		},
-		methods: {
-			goBack(){
-				if(window.history.length == 0){
-					this.$router.push({ path: 'home' });
-				} else {
-					this.$router.go(-1);
-				}
-			}
 		}
 	}
 </script>

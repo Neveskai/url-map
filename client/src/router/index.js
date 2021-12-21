@@ -3,6 +3,7 @@ import Main from '../components/main.vue'
 import Logscreen from '../components/logscreen.vue'
 import TableTop100 from '../components/tables/tabletop100.vue'
 import SignIn from '../components/forms/user-form.vue'
+import ForgotForm from '../components/forms/forgot-form.vue'
 
 const routes = [
   {
@@ -21,6 +22,10 @@ const routes = [
     path: '/sign-in',
     name: 'sign-in',
     component: SignIn
+  },{
+	path: '/forgot-keyword',
+    name: 'forgot-keyword',
+    component: ForgotForm
   }
 ]
 

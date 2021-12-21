@@ -2,17 +2,8 @@
 	<section class="ml-2 mr-3 pt-md-4 pt-2 mb-3">
 		<div class="row m-md-0 m-2">
 			<h5 class="col-12 ml-3 pl-1 mb-2">
-				Registrar <button id="btn-back" class="btn btnBack" @click="goBack()"><i class="fa fa-arrow-right"></i> Retornar</button>
+				Recuperar Senha <button id="btn-back" class="btn btnBack" @click="goBack()"><i class="fa fa-arrow-right"></i> Retornar</button>
 			</h5>
-			<div class="col-12 mt-md-2">
-				<vue-input type="text" target="userform" attr="name" :required="true" label="Nome" placeholder="Nome"></vue-input>
-			</div>
-			<div class="col-12 mt-md-2">
-				<vue-input type="text" target="userform" attr="login" :required="true" label="Login" placeholder="Login"></vue-input>
-			</div>
-			<div class="col-12 mt-md-2">
-				<vue-input type="password" target="userform" attr="keyword" :required="true" :readonly="readonly" label="Senha" placeholder="Senha"></vue-input>
-			</div>
 			<div class="col-12 mt-md-2">
 				<vue-input type="text" target="userform" attr="email" :required="true" :readonly="readonly" label="Email" placeholder="Email"></vue-input>
 			</div>
@@ -55,14 +46,12 @@
 			checkForm(){
 				var me = this;
 				var reg = me.userform;
-				if(me.empty(reg.name)) return false;
 				if(me.empty(reg.email)) return false;
-				if(me.empty(reg.keyword)) return false;
 				return true;
 			},
 			put(){
-				const url = this.$store.state.api_dir+'/user/register';
-				userProvider.registerUser(url, this.userform);
+				const url = this.$store.state.api_dir+'/user/recover';
+				userProvider.recoverUser(url, this.userform);
 			}
 		},
 	}

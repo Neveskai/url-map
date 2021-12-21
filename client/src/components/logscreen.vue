@@ -9,11 +9,14 @@
 				<div class="form-group mb-2">
 					<input type="password" placeholder="Senha" v-model="senha" class="form-control text-center" />
 				</div>
+				<div class="col-12 text-center links mb-3">
+					<router-link to="forgot-keyword">Esqueci minha Senha</router-link>
+				</div>
 				<button type="submit" class="btn btn-block btn-primary" @click="logIn">
 					Login <i v-show="submit_clicked" class="fa fa-spinner fa-spin"></i>
 				</button>
-				<div class="col-12 text-right text-muted mt-2">
-					<router-link to="sign-in">Sign In</router-link>
+				<div class="col-12 text-center links mt-2">
+					<router-link to="sign-in">Registrar-se</router-link>
 				</div>
 				<span id="copyright">&copy; {{ copy }}</span>
 				<span id="copyright2">v{{ version }}</span>
@@ -23,7 +26,7 @@
 </template>
 <script>
 	import logo from "../assets/logo.png";
-	import userService from './../services/user.service.js';
+	import userProvider from './../provider/user.provider.js';
 	export default {
 		data() { return {
 			login: '',
@@ -37,7 +40,8 @@
 			user: {
 				get()	{ return this.$store.state.user; },
 				set(obj){ 
-					this.$store.commit('setObject', { target: 'user', data: obj }); 
+					this.$store.commit('setObject', { target: 'user', data: obj });
+					console.log(obj);
 				}
 			},
 			reqs: {
@@ -49,24 +53,20 @@
 			api_dir() { return this.$store.state.api_dir; }
 		},
 		methods: {
-			userAuth(login, senha) {
-				const url = this.api_dir+'/user/auth';
-				userService.userAuth(url, login, senha);
-			},
-			logout(){
-				userService.logout();
-			},
-			createUser(arr){
-				userService.createUser(arr)
-			},
 			logIn(){
 				this.submit_clicked = true;
-				this.$parent.userAuth(this.login, this.senha);
+				const url = this.api_dir+'/user/auth';
+				userProvider.userAuth(url, this.login, this.senha).then( user => {
+					this.user = user;
+				});
 			}
 		}
 	}
 </script>
 <style scoped>
+	.links {
+		font-size: 14px;
+	}
 	section { padding: 0px; }
 	#loginBody {
 		width: 30%; 

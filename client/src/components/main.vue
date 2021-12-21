@@ -10,7 +10,7 @@
 						<span class="input-group-text" id="basic-addon1">@</span>
 					</div>
 					<input type="text" placeholder="Digite a url principal" v-model="url" class="form-control" />
-					<button class="btn btn-primary btn-block" @click="shortUrl">
+					<button class="btn btn-primary" @click="shortUrl">
 						Short URL <i v-show="submit_clicked" class="fa fa-spinner fa-spin"></i>
 					</button>
 				</div>
@@ -39,5 +39,15 @@
 	section { padding: 0px; }
 	.btn.btn-primary {
 		font-weight: 500 !important;
+		width: 180px;
+		border-radius: 0 3px 3px 0;
 	}
+	@media screen and (max-width: 800px) {
+		.btn.btn-primary {
+			display:inline-block;
+			width: 100%;
+			border-radius: 3px;
+			margin-top: 5px;
+		}
+	}   
 </style>
