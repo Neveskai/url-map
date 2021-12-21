@@ -43,21 +43,15 @@
 					this.$store.commit('setObject', { target: 'user', data: obj });
 					console.log(obj);
 				}
-			},
-			reqs: {
-				get() { return this.$store.state.reqs; },
-				set(arr)	{ 
-					this.$store.commit('setArray', { target:'reqs', data: arr }); 
-				}
-			},
-			api_dir() { return this.$store.state.api_dir; }
+			}
 		},
 		methods: {
 			logIn(){
 				this.submit_clicked = true;
-				const url = this.api_dir+'/user/auth';
+				const url = this.$store.state.api_dir+'/user/auth';
 				userProvider.userAuth(url, this.login, this.senha).then( user => {
 					this.user = user;
+					this.$router.push('/');
 				});
 			}
 		}

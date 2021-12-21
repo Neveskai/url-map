@@ -63,6 +63,7 @@
 			put(){
 				const url = this.$store.state.api_dir+'/user/register';
 				userProvider.registerUser(url, this.userform);
+				this.$router.push('/');
 			}
 		},
 	}

@@ -14,6 +14,10 @@ class User {
 		return request(url, user, 'POST').then(resp => console.log(resp));
 	}
 	
+	static logout(store){
+		store.commit('setObject', { target: 'user', data: {id:0, name: ''} });
+	}
+	
 }
 
 export default User;
