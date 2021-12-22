@@ -14,13 +14,18 @@ UrlShorter = function() {
 		});
 	};
 	
-	var addCode = function(PDO, urlCode, url){
+	var addCode = function(PDO, urlCode, url, userID = false){
 		return new Promise(function(resolve, reject) {
 			var date = new Date(); 
 			date.setDate(date.getDate() + 7);
+			if(!userID){
+				var sql = 'INSERT INTO shortener (Url, Short, expires) VALUES ?';
+				var values = [[url, urlCode, date]];
+			} else {
+				var sql = 'INSERT INTO shortener (Url, Short, expires, users_idUser) VALUES ?';
+				var values = [[url, urlCode, date, userID]];
+			} 
 			
-			var sql = 'INSERT INTO shortener (Url, Short, expires) VALUES ?';
-			var values = [[url, urlCode, date]];
 			PDO.query(sql, [values], function(err, resp){
 				if(err) reject(err);
 				resolve(urlCode);
@@ -28,17 +33,19 @@ UrlShorter = function() {
 		});
 	};
 	
-	this.urlRegister = function(PDO, url) {
+	this.urlRegister = function(PDO, args) {
+		var urlCode, valid = false;
+		const url = args.url;
+		const userID = args.userID != 0 ? args.userID : false;
 		return new Promise(async function(resolve, reject) {
 			if (validUrl.isUri(url)) {
-				var urlCode, valid = false;
 				while(valid == false){
 					urlCode = shortid.generate();
 					await checkCode(PDO, urlCode).then(
 						result => {
 							if(result){
 								valid = true;
-								addCode(PDO, urlCode, url).then( _url => {
+								addCode(PDO, urlCode, url, userID).then( _url => {
 									resolve({ url: _url });
 								})
 							}
@@ -66,7 +73,7 @@ UrlShorter = function() {
 			PDO.query('SELECT Url AS url FROM shortener WHERE Short = "'+urlCode+'"', function(err, resp){
 				if(err) reject(err);
 				if(resp[0] != undefined) resolve(resp[0]);
-				resolve(false);
+				resolve({ error: 'Short not found' });
 			});
 		});
 	}

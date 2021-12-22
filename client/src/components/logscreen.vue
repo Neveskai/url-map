@@ -49,8 +49,12 @@
 				this.submit_clicked = true;
 				const url = this.$store.state.api_dir+'/user/auth';
 				userProvider.userAuth(url, this.login, this.senha).then( user => {
-					this.user = user;
-					this.$router.push('/');
+					if(user.error != undefined) {
+						console.log(user.error);
+					} else {
+						this.user = user;
+						this.$router.push('/');
+					}
 				});
 			}
 		}

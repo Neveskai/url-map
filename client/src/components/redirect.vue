@@ -1,6 +1,9 @@
 <template>
 	<section>
 		{{ redirect() }}
+		<div class="col-12">
+			<h2 class="ml-3"> Short not found </h2>
+		</div>
 	</section>
 </template>
 <script>
@@ -11,11 +14,14 @@
 		},
 		methods: {
 			redirect(){
-				var shortUrl = this.$route.params.code;
-				var url = this.$store.state.api_dir+'/url/redirect';
+				const url = this.$store.state.api_dir+'/url/redirect';
+				const shortUrl = this.$route.params.code;
 				urlsProvider.getUrl(url, shortUrl).then( resp => {
-					console.log(resp.url);
-					window.location.href = resp.url;
+					if(resp.error != undefined) {
+						return resp.error;
+					} else {
+						window.location.href = resp.url;
+					}
 				});
 			}
 		}

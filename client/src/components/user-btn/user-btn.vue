@@ -1,7 +1,7 @@
 <template>
 	<div class="navi text-center">
 		<div class="mr-2 mr-md-4 navi text-center">
-			<router-link to="login" v-if="user.id == 0">
+			<router-link to="/page/login" v-if="user.id == 0">
 				<i class="fa fa-user-secret"></i><br>
 				<span class="font-bold">Login</span>
 			</router-link>

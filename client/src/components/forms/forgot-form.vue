@@ -18,6 +18,7 @@
 <script>
 	import vueInput from './inputs/input.vue'
 	import userProvider from './../../provider/user.provider.js';
+	import { goBack } from './../../provider/goback.js';
 	export default {
 		components: {
 			'vueInput': vueInput
@@ -41,7 +42,7 @@
 				return false;
 			},
 			goBack(){
-				this.$parent.$parent.goBack();
+				goBack(this.$router);
 			},
 			checkForm(){
 				var me = this;

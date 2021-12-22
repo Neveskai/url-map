@@ -2,8 +2,8 @@ import { request } from './fetch.js';
 
 class Urls {
 	
-	static registerUrl(url, toshort){
-		return request(url, { url: toshort }, 'PUT').then(resp => { return resp; });
+	static registerUrl(url, toshort, userID){
+		return request(url, { url: toshort, userID: userID }, 'PUT').then(resp => { return resp; });
 	}
 	
 	static deleteUrl(url, id){

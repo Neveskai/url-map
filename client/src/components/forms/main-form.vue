@@ -57,7 +57,8 @@
 				var me = this;
 				me.submit_clicked = true;
 				const url = me.$store.state.api_dir+'/url/register';
-				urlsProvider.registerUrl(url, me.url).then( resp => {
+				const userID = me.$store.state.user.id;
+				urlsProvider.registerUrl(url, me.url, userID).then( resp => {
 					me.submit_clicked = false;
 					if(resp.error != undefined) {
 						console.log(resp.error);
