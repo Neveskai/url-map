@@ -54,6 +54,12 @@
 		margin-top: 2px;
 		cursor: pointer;
 	}
+	.user-menu .menu-btn:hover {
+		color: #0077c9;
+	}
+	.user-btn:hover {
+		color: #0077c9;
+	}
 	.highlight{
 		color: #0077bb !important;
 	}
@@ -73,8 +79,5 @@
 		font-size: 12px;
 		white-space: nowrap;
 		transition: 0.5s;
-	}
-	.navi:hover span, .navi:hover i {
-		color: #0077c9;
 	}
 </style>

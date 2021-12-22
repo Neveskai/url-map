@@ -18,6 +18,13 @@
 			<p> URL Shortener is a free tool to shorten a URL or reduce a link <br>
 			Use URL Shortener to create a shortened link making it easy to remember</p>
 		</div>
+		<div class="col-12" v-show="shorturl">
+			<h2> Your shortened URL </h2>
+			<div class="mt-3 mb-3 mr-4" style="padding: 10px; background: #fff;">
+				<a :href="shorturl" target="_blank" > {{ baseurl }}/{{ shorturl }} </a>
+			</div>
+			<p> Copy the shortened link and share it in messages, texts, posts, websites and other locations. </p>
+		</div>
 	</section>
 </template>
 <script>
@@ -25,6 +32,8 @@
 	export default {
 		data() { return {
 			url: '',
+			shorturl: '',
+			baseurl: 'http://localhost:8080',
 			submit_clicked: false,
 			submit_disabled: true
 		}},
@@ -37,9 +46,18 @@
 				if(this.empty(this.url)) return false;
 				return true;
 			},
-			put(){
-				const url = this.$store.state.api_dir+'/url/register';
-				urlsProvider.registerUrl(url, this.url);
+			shortUrl(){
+				var me = this;
+				me.submit_clicked = true;
+				const url = me.$store.state.api_dir+'/url/register';
+				urlsProvider.registerUrl(url, me.url).then( resp => {
+					me.submit_clicked = false;
+					if(resp.error != undefined) {
+						console.log(resp.error);
+					} else {
+						me.shorturl = resp.url;
+					}
+				});
 			}
 		},
 	}

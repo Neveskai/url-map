@@ -13,13 +13,9 @@
 		components: {
 			'mainForm' : mainForm
 		},
-		data(){ return {
-			url: '',
-			submit_clicked: false
-		}},
 		methods: {
-			shortUrl(){
-				this.submit_clicked = true;
+			redirect(){
+				location.assign(this.shorturl);
 			}
 		}
 	}
