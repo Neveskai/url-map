@@ -14,6 +14,10 @@ class Urls {
 		return request(url, { id: userID }, 'GET').then(resp => { return resp; });
 	}
 	
+	static getUrl(url, shortUrl){
+		return request(url+'/'+shortUrl, {}, 'GET').then(resp => { return resp; });
+	}
+	
 }
 
 export default Urls;

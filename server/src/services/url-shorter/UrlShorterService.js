@@ -19,10 +19,10 @@ UrlShorterService = function(app) {
 		})
 	});
 	
-	app.get('/api/v1/url/redirect', function(req, res) {
+	app.get('/api/v1/url/redirect/:short', function(req, res) {
 		const PDO = app.get('PDO');
-		const args = req.body;
-		Urls.urlRedirect(PDO, args).then( resp => {
+		const shortUrl = req.params.short;
+		Urls.urlRedirect(PDO, shortUrl).then( resp => {
 			res.send(resp);
 		})
 	});

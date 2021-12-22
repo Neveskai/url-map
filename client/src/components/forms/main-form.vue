@@ -32,11 +32,18 @@
 	export default {
 		data() { return {
 			url: '',
-			shorturl: '',
-			baseurl: 'http://localhost:8080',
 			submit_clicked: false,
 			submit_disabled: true
 		}},
+		computed: {
+			baseurl() { return this.$store.state.baseurl; },
+			shorturl: {
+				get() { return this.$store.state.shortUrl; },
+				set(val) { 
+					this.$store.commit('setVal', { target: 'shortUrl', data: val });
+				}
+			}
+		},
 		methods: {
 			empty(val){
 				if(val == 0 || val == '') return true;

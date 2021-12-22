@@ -41,7 +41,6 @@
 				get()	{ return this.$store.state.user; },
 				set(obj){ 
 					this.$store.commit('setObject', { target: 'user', data: obj });
-					console.log(obj);
 				}
 			}
 		},

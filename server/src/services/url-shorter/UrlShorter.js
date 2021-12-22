@@ -4,8 +4,6 @@ const mysql = require('mysql');
 
 UrlShorter = function() {
 	
-	var domain = 'http://localhost:8080';
-	
 	var checkCode = function(PDO, urlCode){
 		return new Promise(function(resolve, reject) {
 			PDO.query('SELECT idShort FROM shortener WHERE Short = "'+urlCode+'"', function(err, resp){
@@ -63,9 +61,13 @@ UrlShorter = function() {
 		});
 	}
 	
-	this.urlRedirect = function(PDO, id) {
+	this.urlRedirect = function(PDO, urlCode) {
 		return new Promise(function(resolve, reject) {
-			resolve({ resp: id });
+			PDO.query('SELECT Url AS url FROM shortener WHERE Short = "'+urlCode+'"', function(err, resp){
+				if(err) reject(err);
+				if(resp[0] != undefined) resolve(resp[0]);
+				resolve(false);
+			});
 		});
 	}
 };

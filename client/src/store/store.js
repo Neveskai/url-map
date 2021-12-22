@@ -21,6 +21,8 @@ export default createStore({
 			email: '',
 			keyword: ''
 		},
+		shorturl: '',
+		baseurl: 'http://localhost:8080',
 		api_dir: 'http://localhost:3001/api/v1'
 	},
 	mutations: {
