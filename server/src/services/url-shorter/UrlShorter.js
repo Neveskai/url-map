@@ -62,16 +62,29 @@ UrlShorter = function() {
 		});
 	}
 	
+	this.getMyUrls = function(PDO, id){
+		return new Promise(function(resolve, reject) {
+			PDO.query('SELECT idShort AS id, Url AS url, Short AS short, count, expires FROM shortener WHERE users_idUser = '+id, function(err, resp){
+				if(err) reject(err);
+				resolve(resp);
+			});
+		});
+	}
+	
 	this.urlDelete = function(PDO, id) {
 		return new Promise(function(resolve, reject) {
-			resolve({ resp: id });
+			PDO.query('DELETE FROM shortener WHERE idShort = '+id, function(err, resp){
+				if(err) reject(err);
+				resolve({ url: 'URL deleted' });
+			});
 		});
 	}
 	
 	this.urlRedirect = function(PDO, urlCode) {
 		return new Promise(function(resolve, reject) {
-			PDO.query('SELECT Url AS url FROM shortener WHERE Short = "'+urlCode+'"', function(err, resp){
+			PDO.query('SELECT Url AS url, idShort AS id FROM shortener WHERE Short = "'+urlCode+'"', function(err, resp){
 				if(err) reject(err);
+				PDO.query('UPDATE shortener SET count = count + 1 WHERE idShort = '+resp[0].id);
 				if(resp[0] != undefined) resolve(resp[0]);
 				resolve({ error: 'Short not found' });
 			});

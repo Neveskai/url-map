@@ -64,6 +64,7 @@
 						console.log(resp.error);
 					} else {
 						me.shorturl = resp.url;
+						me.$store.commit('updateObjAttr', { target: 'sync', attr: 'myurls', data: true });
 					}
 				});
 			}

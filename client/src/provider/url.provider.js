@@ -11,7 +11,7 @@ class Urls {
 	}
 	
 	static getMyUrls(url, userID){
-		return request(url, { id: userID }, 'GET').then(resp => { return resp; });
+		return request(url+'/'+userID, {}, 'GET').then(resp => { return resp; });
 	}
 	
 	static getUrl(url, shortUrl){

@@ -11,6 +11,12 @@
 						<span class="font-bold">Top 100</span>
 					</router-link>
 				</div>
+				<div class="mr-2 mr-md-4 navi text-center" v-show="id != 0">
+					<router-link to="/page/myurls">
+						<i class="fa fa-list"></i><br>
+						<span class="font-bold">My Urls</span>
+					</router-link>
+				</div>
 				<div class="mr-2 mr-md-4 navi text-center">
 					<router-link to="/">
 						<i class="fa fa-home"></i><br>
@@ -27,6 +33,9 @@
 	export default {
 		components: {
 			'userBtn': userBtn
+		},
+		computed: {
+			id() { return this.$store.state.user.id; }
 		},
 		props: {
 			title: String

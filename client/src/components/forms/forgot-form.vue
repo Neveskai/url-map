@@ -16,7 +16,7 @@
 	</section>
 </template>
 <script>
-	import vueInput from './inputs/input.vue'
+	import vueInput from './fields/input.vue'
 	import userProvider from './../../provider/user.provider.js';
 	import { goBack } from './../../provider/goback.js';
 	export default {

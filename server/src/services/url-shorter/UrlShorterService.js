@@ -11,10 +11,19 @@ UrlShorterService = function(app) {
 		})
 	});
 	
-	app.get('/api/v1/url/delete', function(req, res) {
+	app.delete('/api/v1/url/delete', function(req, res) {
 		const PDO = app.get('PDO');
-		const args = req.body;
-		Urls.urlDelete(PDO, args).then( resp => {
+		const id = req.body.id;
+		console.log(id);
+		Urls.urlDelete(PDO, id).then( resp => {
+			res.send(resp);
+		})
+	});
+	
+	app.get('/api/v1/url/myurls/:id', function(req, res) {
+		const PDO = app.get('PDO');
+		const args = req.params.id;
+		Urls.getMyUrls(PDO, args).then( resp => {
 			res.send(resp);
 		})
 	});
