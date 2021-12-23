@@ -17,6 +17,14 @@ UserService = function(app) {
 			res.send(resp);
 		})
 	});
+	
+	app.post('/api/v1/user/token', function(req, res) {
+		const PDO = app.get('PDO');
+		const token = req.body.token;
+		User.checkToken(PDO, token).then(resp => {
+			res.send(resp);
+		})
+	});
 };
 
 module.exports = UserService;

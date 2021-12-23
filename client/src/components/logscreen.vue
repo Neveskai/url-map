@@ -55,7 +55,17 @@
 						this.user = user;
 						this.$router.push('/');
 					}
-				});
+					this.user = user;
+					this.$router.push('/');
+					var me = this;
+					me.submit_clicked = true;
+					const url = me.$store.state.api_dir+'/user/auth';
+					userProvider.userAuth(url, me.login, me.senha).then( resp => {
+						if(!resp) return false;
+						me.user = resp;
+						me.$router.push('/');
+					});
+				})
 			}
 		}
 	}

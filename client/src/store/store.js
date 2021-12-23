@@ -5,6 +5,7 @@ export default createStore({
 		user: {
 			id: 0,
 			name: '',
+			token: ''
 		},
 		sync: {
 			myurls: false

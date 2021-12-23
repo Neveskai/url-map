@@ -8,6 +8,7 @@
 <script>
 	import headerVue from './components/menus/header.vue'
 	import urlsProvider from './provider/url.provider.js'
+	import userProvider from './provider/user.provider.js'
 	export default {
 		components: {
 			'headerVue': headerVue
@@ -17,6 +18,12 @@
 			table: {
 				get()	{ return this.$store.state.tablemyurls; },
 				set(obj){ this.$store.commit('updateObjAttr', { target: 'tablemyurls', data: obj, attr: 'data' }); }
+			},
+			user: {
+				get()	{ return this.$store.state.user; },
+				set(obj){ 
+					this.$store.commit('setObject', { target: 'user', data: obj });
+				}
 			},
 			sync(){ return this.$store.state.sync; }
 		},
@@ -43,7 +50,20 @@
 				urlsProvider.getMyUrls(url, id).then( urls => {
 					me.table = urls;
 				})
-			}
+			},
+			checkLogIn(){
+				var me = this;
+				var token = userProvider.getCookieToken();
+				if (!token) return false;
+				var url = me.$store.state.api_dir+'/user/token';
+				userProvider.checkLogin(url, token).then( user => {
+					if(!user) return false;
+					return me.user = user;
+				})
+			},
+		},
+		created(){
+			this.checkLogIn();
 		}
 	}
 </script>
