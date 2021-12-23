@@ -1,3 +1,6 @@
+export const api_dir = 'http://localhost:3001/api/v1';
+export const baseurl = 'http://localhost:8080';
+
 export function request(url, object, method = 'GET'){
 	var config;
 	if(method == 'GET'){

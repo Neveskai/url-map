@@ -1,22 +1,21 @@
 <template>
 	<section>
-		{{ redirect() }}
 		<div class="col-12">
 			<h2 class="ml-3"> Short not found </h2>
 		</div>
 	</section>
 </template>
 <script>
-	import urlsProvider from './../provider/url.provider.js';
+	import urlsProvider from './../../provider/url.provider.js';
 	export default {
 		computed: {
 			shorturl(){ return this.$store.state.shortUrl; },
 		},
 		methods: {
 			redirect(){
-				const url = this.$store.state.api_dir+'/url/redirect';
 				const shortUrl = this.$route.params.code;
-				urlsProvider.getUrl(url, shortUrl).then( resp => {
+				// Add Local Cache to Request
+				urlsProvider.getUrl(shortUrl).then( resp => {
 					if(resp.error != undefined) {
 						return resp.error;
 					} else {
@@ -24,6 +23,9 @@
 					}
 				});
 			}
+		},
+		created(){
+			this.redirect();
 		}
 	}
 </script>

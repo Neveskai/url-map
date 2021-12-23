@@ -25,8 +25,8 @@
 	</section>
 </template>
 <script>
-	import logo from "../assets/logo.png";
-	import userProvider from './../provider/user.provider.js';
+	import logo from "../../assets/logo.png";
+	import userProvider from './../../provider/user.provider.js';
 	export default {
 		data() { return {
 			login: '',
@@ -47,24 +47,13 @@
 		methods: {
 			logIn(){
 				this.submit_clicked = true;
-				const url = this.$store.state.api_dir+'/user/auth';
-				userProvider.userAuth(url, this.login, this.senha).then( user => {
+				userProvider.userAuth(this.login, this.senha).then( user => {
 					if(user.error != undefined) {
 						console.log(user.error);
 					} else {
 						this.user = user;
 						this.$router.push('/');
 					}
-					this.user = user;
-					this.$router.push('/');
-					var me = this;
-					me.submit_clicked = true;
-					const url = me.$store.state.api_dir+'/user/auth';
-					userProvider.userAuth(url, me.login, me.senha).then( resp => {
-						if(!resp) return false;
-						me.user = resp;
-						me.$router.push('/');
-					});
 				})
 			}
 		}

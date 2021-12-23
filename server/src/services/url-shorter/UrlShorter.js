@@ -71,6 +71,15 @@ UrlShorter = function() {
 		});
 	}
 	
+	this.getTopUrls = function(PDO){
+		return new Promise(function(resolve, reject) {
+			PDO.query('SELECT idShort AS id, Url AS url, Short AS short, count, expires FROM shortener ORDER BY count DESC LIMIT 100', function(err, resp){
+				if(err) reject(err);
+				resolve(resp);
+			});
+		});
+	}
+	
 	this.urlDelete = function(PDO, id) {
 		return new Promise(function(resolve, reject) {
 			PDO.query('DELETE FROM shortener WHERE idShort = '+id, function(err, resp){

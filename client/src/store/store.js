@@ -8,10 +8,11 @@ export default createStore({
 			token: ''
 		},
 		sync: {
-			myurls: false
+			myurls: false,
+			topurls: false
 		},
-		tabletop100: {
-			id: 'tabletop100',
+		tabletopurls: {
+			id: 'tabletopurls',
 			title: 'TOP 100',
 			subtitle: '',
 			data: [],
@@ -28,9 +29,7 @@ export default createStore({
 			email: '',
 			keyword: ''
 		},
-		shorturl: '',
-		baseurl: 'http://localhost:8080',
-		api_dir: 'http://localhost:3001/api/v1'
+		shorturl: ''
 	},
 	mutations: {
 		setObject(state, config){

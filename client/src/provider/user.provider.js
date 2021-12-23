@@ -1,18 +1,25 @@
-import { request } from './fetch.js';
+import { request, api_dir } from './fetch.js';
 
 class User {
 	
-	static registerUser(url, user){
+	static registerUser(user){
+		const url = api_dir + '/user/register';
 		return request(url, user, 'PUT').then(resp => console.log(resp));
 	}
 	
-	static userAuth(url, login, senha){
+	static userAuth(login, senha){
+		const url = api_dir + '/user/auth';
 		return request(url, { login: login, senha: senha }, 'POST').then(user => {
 			if(user.error != undefined) return false;
 			var exp_dt = new Date(); exp_dt.setMonth(exp_dt.getDate() + 1);
 			document.cookie = "token="+user.token+"; path=/; expires=" + exp_dt.toUTCString();
 			return user;
 		});
+	}
+	
+	static setUser(store, user){
+		store.commit('setObject', { target: 'user', data: user });
+		store.commit('updateObjAttr', { target: 'sync', data: true, attr: 'myurls' });
 	}
 	
 	static getCookieToken(){
@@ -30,14 +37,16 @@ class User {
 		}
 	}
 	
-	static checkLogin(url, token){
+	static checkLogin(token){
+		const url = api_dir + '/user/token';
 		return request(url, { token: token }, 'POST').then(user => { 
 			if(user.id == undefined) return false;
 			return user;
 		});
 	}
 	
-	static recoverUser(url, user){
+	static recoverUser(user){
+		const url = api_dir + '/user/recover';
 		return request(url, user, 'POST').then(resp => console.log(resp));
 	}
 	

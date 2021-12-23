@@ -62,8 +62,7 @@
 				return true;
 			},
 			put(){
-				const url = this.$store.state.api_dir+'/user/register';
-				userProvider.registerUser(url, this.userform);
+				userProvider.registerUser(this.userform);
 				this.$router.push('/page/login');
 			}
 		},

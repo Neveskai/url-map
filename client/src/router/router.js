@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Main from '../components/main.vue'
 import SignIn from '../components/forms/user-form.vue'
-import Redirect from '../components/redirect.vue'
-import Logscreen from '../components/logscreen.vue'
+import Redirect from '../components/views/redirect.vue'
+import Logscreen from '../components/views/logscreen.vue'
 import ForgotForm from '../components/forms/forgot-form.vue'
-import TableTop100 from '../components/tables/tabletop100.vue'
+import TableTopUrls from '../components/tables/tabletopurls.vue'
 import TableMyUrls from '../components/tables/tablemyurls.vue'
 
 const routes = [
@@ -27,7 +27,7 @@ const routes = [
 	},{
 		path: '/page/top100',
 		name: 'Top100',
-		component: TableTop100
+		component: TableTopUrls
 	},{
 		path: '/page/sign-in',
 		name: 'sign-in',

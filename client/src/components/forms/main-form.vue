@@ -29,14 +29,15 @@
 </template>
 <script>
 	import urlsProvider from './../../provider/url.provider.js';
+	import { baseurl } from './../../provider/fetch.js';
 	export default {
 		data() { return {
 			url: '',
 			submit_clicked: false,
-			submit_disabled: true
+			submit_disabled: true,
+			baseurl: baseurl
 		}},
 		computed: {
-			baseurl() { return this.$store.state.baseurl; },
 			shorturl: {
 				get() { return this.$store.state.shortUrl; },
 				set(val) { 
@@ -56,9 +57,8 @@
 			shortUrl(){
 				var me = this;
 				me.submit_clicked = true;
-				const url = me.$store.state.api_dir+'/url/register';
 				const userID = me.$store.state.user.id;
-				urlsProvider.registerUrl(url, me.url, userID).then( resp => {
+				urlsProvider.registerUrl(me.url, userID).then( resp => {
 					me.submit_clicked = false;
 					if(resp.error != undefined) {
 						console.log(resp.error);
