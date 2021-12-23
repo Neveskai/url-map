@@ -6,9 +6,15 @@
 		<div class="col-md-9 text-md-right col-12 text-center p-0 m-md-0">
 			<section class="d-inline-flex pl-1">
 				<div class="mr-2 mr-md-4 navi text-center">
-					<router-link to="top100">
+					<router-link to="/page/top100">
 						<i class="fa fa-link"></i><br>
 						<span class="font-bold">Top 100</span>
+					</router-link>
+				</div>
+				<div class="mr-2 mr-md-4 navi text-center" v-show="id != 0">
+					<router-link to="/page/myurls">
+						<i class="fa fa-list"></i><br>
+						<span class="font-bold">My Urls</span>
 					</router-link>
 				</div>
 				<div class="mr-2 mr-md-4 navi text-center">
@@ -27,6 +33,9 @@
 	export default {
 		components: {
 			'userBtn': userBtn
+		},
+		computed: {
+			id() { return this.$store.state.user.id; }
 		},
 		props: {
 			title: String

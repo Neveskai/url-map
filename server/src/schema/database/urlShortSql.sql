@@ -4,6 +4,7 @@ CREATE TABLE Shortener (
   Url VARCHAR(300) NOT NULL,
   Short VARCHAR(50) NOT NULL,
   expires TIMESTAMP NULL,
+  count INTEGER UNSIGNED NULL DEFAULT 0,
   PRIMARY KEY(idShort),
   INDEX Shortener_FKIndex1(Users_idUser)
 );

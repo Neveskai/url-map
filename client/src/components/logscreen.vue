@@ -41,7 +41,6 @@
 				get()	{ return this.$store.state.user; },
 				set(obj){ 
 					this.$store.commit('setObject', { target: 'user', data: obj });
-					console.log(obj);
 				}
 			}
 		},
@@ -50,8 +49,12 @@
 				this.submit_clicked = true;
 				const url = this.$store.state.api_dir+'/user/auth';
 				userProvider.userAuth(url, this.login, this.senha).then( user => {
-					this.user = user;
-					this.$router.push('/');
+					if(user.error != undefined) {
+						console.log(user.error);
+					} else {
+						this.user = user;
+						this.$router.push('/');
+					}
 				});
 			}
 		}

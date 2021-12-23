@@ -6,12 +6,18 @@ export default createStore({
 			id: 0,
 			name: '',
 		},
-		reqs: {
-			login: null
+		sync: {
+			myurls: false
 		},
 		tabletop100: {
 			id: 'tabletop100',
-			title: 'Top 100',
+			title: 'TOP 100',
+			subtitle: '',
+			data: [],
+		},
+		tablemyurls: {
+			id: 'tablemyurls',
+			title: 'My Urls',
 			subtitle: '',
 			data: [],
 		},
@@ -21,6 +27,8 @@ export default createStore({
 			email: '',
 			keyword: ''
 		},
+		shorturl: '',
+		baseurl: 'http://localhost:8080',
 		api_dir: 'http://localhost:3001/api/v1'
 	},
 	mutations: {
