@@ -15,7 +15,6 @@
 								<th class="thSticky"><div class="stickyBorder"></div>URL</th>
 								<th class="thSticky"><div class="stickyBorder"></div>Expires</th>
 								<th class="thSticky"><div class="stickyBorder"></div>Count</th>
-								<th class="thSticky"><div class="stickyBorder"></div><i class="fa fa-trash"></i></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -26,7 +25,6 @@
 								<td>{{ row.url }}</td>
 								<td>{{ row.expires }}</td>
 								<td>{{ row.count }}</td>
-								<td><i class="fa fa-trash" @click="del(row.id)"></i></td>
 							</tr>
 						</tbody>
 					</table>

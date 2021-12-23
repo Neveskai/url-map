@@ -50,7 +50,7 @@
 				pageLength: 14,
 				bLengthChange: false,
 				bFilter: true,
-				aaSorting: [[ 1, "asc" ]],
+				aaSorting: [[ 0, "asc" ]],
 				bInfo: false,
 				bAutoWidth: false,
 				searching: false,
@@ -87,7 +87,7 @@
 			},
 			del(id) {
 				if (confirm("You sure?")) {
-					urlsProvider.deleteUrl(id);
+					urlsProvider.deleteUrl(this.$store, id);
 				}
 			}
 		},
