@@ -2,19 +2,23 @@ import { request, api_dir } from './fetch.js';
 
 class Urls {
 	
-	static registerUrl(toshort, userID){
+	static registerUrl(store, toshort, userID){
 		const url = api_dir +'/url/register';
 		return request(url, { url: toshort, userID: userID }, 'PUT')
-		.then(resp => { 
+		.then(resp => {
+			store.commit('updateObjAttr', { target: 'sync', data: resp, attr: 'myurls' });
+			store.commit('updateObjAttr', { target: 'sync', data: resp, attr: 'topurls' });
 			return resp; 
 		});
 	}
 	
-	static deleteUrl(id){ 
+	static deleteUrl(store, id){ 
 		const url = api_dir + '/url/delete';
 		return request(url, { id: id }, 'DELETE')
-		.then(resp => { 
-			return resp; 
+		.then(resp => {
+			store.commit('updateObjAttr', { target: 'sync', data: resp, attr: 'myurls' });
+			store.commit('updateObjAttr', { target: 'sync', data: resp, attr: 'topurls' });
+			return resp;
 		});
 	}
 	
@@ -41,7 +45,7 @@ class Urls {
 	static getUrl(shortUrl){
 		const url = api_dir +'/url/redirect/'+ shortUrl;
 		return request(url, {}, 'GET')
-		.then(resp => { 
+		.then(resp => {
 			return resp; 
 		});
 	}
