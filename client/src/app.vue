@@ -6,26 +6,12 @@
 	</section>
 </template>
 <script>
-<<<<<<< Updated upstream
-	import headerVue from './components/menus/header.vue'
-	import urlsProvider from './provider/url.provider.js'
-	export default {
-		components: {
-			'headerVue': headerVue
-=======
-<<<<<<< Updated upstream
-	import headerVue from './components/menus/header.vue';
-	export default {
-		components: {
-			'headerVue': headerVue
-=======
 	import headerVue from './components/menus/header.vue'
 	import urlsProvider from './provider/url.provider.js'
 	import userProvider from './provider/user.provider.js'
 	export default {
 		components: {
 			'headerVue': headerVue
->>>>>>> Stashed changes
 		},
 		computed: {
 			id(){ return this.$store.state.user.id; },
@@ -33,15 +19,12 @@
 				get()	{ return this.$store.state.tablemyurls; },
 				set(obj){ this.$store.commit('updateObjAttr', { target: 'tablemyurls', data: obj, attr: 'data' }); }
 			},
-<<<<<<< Updated upstream
-=======
 			user: {
 				get()	{ return this.$store.state.user; },
 				set(obj){ 
 					this.$store.commit('setObject', { target: 'user', data: obj });
 				}
 			},
->>>>>>> Stashed changes
 			sync(){ return this.$store.state.sync; }
 		},
 		watch: {
@@ -67,9 +50,6 @@
 				urlsProvider.getMyUrls(url, id).then( urls => {
 					me.table = urls;
 				})
-<<<<<<< Updated upstream
-			}
-=======
 			},
 			checkLogIn(){
 				var me = this;
@@ -84,8 +64,6 @@
 		},
 		created(){
 			this.checkLogIn();
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 		}
 	}
 </script>
