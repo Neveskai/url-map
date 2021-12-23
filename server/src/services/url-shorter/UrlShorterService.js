@@ -20,6 +20,13 @@ UrlShorterService = function(app) {
 		})
 	});
 	
+	app.get('/api/v1/url/topurls', function(req, res) {
+		const PDO = app.get('PDO');
+		Urls.getTopUrls(PDO).then( resp => {
+			res.send(resp);
+		})
+	});
+	
 	app.get('/api/v1/url/myurls/:id', function(req, res) {
 		const PDO = app.get('PDO');
 		const args = req.params.id;

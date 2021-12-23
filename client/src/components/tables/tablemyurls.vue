@@ -38,6 +38,7 @@
 	import DataTable from 'datatables.net';
 	import 'datatables.net-dt/css/jquery.dataTables.css'
 	import urlsProvider from './../../provider/url.provider.js';
+	import { baseurl } from './../../provider/fetch.js';
 	const $ = jQuery;
 	DataTable.$ = $;
 	$.fn.dataTable = DataTable;
@@ -55,7 +56,7 @@
 				searching: false,
 				responsive: false
 			},
-			baseurl: this.$store.state.baseurl
+			baseurl: baseurl
 		}},
 		computed: {
 			table() { return this.$store.state.tablemyurls; }
@@ -85,9 +86,8 @@
 				return date[2]+'/'+date[1]+'/'+date[0];
 			},
 			del(id) {
-				const url = this.$store.state.api_dir + '/url/delete';
 				if (confirm("You sure?")) {
-					urlsProvider.deleteUrl(url, id);
+					urlsProvider.deleteUrl(id);
 				}
 			}
 		},

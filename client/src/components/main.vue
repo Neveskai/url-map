@@ -12,11 +12,6 @@
 	export default {
 		components: {
 			'mainForm' : mainForm
-		},
-		methods: {
-			redirect(){
-				location.assign(this.shorturl);
-			}
 		}
 	}
 </script>

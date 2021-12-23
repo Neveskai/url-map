@@ -6,38 +6,29 @@
 					<span class="title">{{ table.title }} </span>
 				</div>
 				<div class="col-12 pt-2 pl-3 pr-md-0 cv-middle" style="overflow: visible;">
-					<table class="table" :id="table.id">
+					<table class="table" :id="table.id" v-if="table.data.length > 0">
 						<thead>
 							<tr class="table-l">
-								<th class="thSticky"><div class="stickyBorder"></div>A</th>
-								<th class="thSticky"><div class="stickyBorder"></div>B</th>
-								<th class="thSticky"><div class="stickyBorder"></div>B</th>
+								<th class="thSticky"><div class="stickyBorder"></div>Place</th>
+								<th class="thSticky"><div class="stickyBorder"></div>ID</th>
+								<th class="thSticky"><div class="stickyBorder"></div>Short</th>
+								<th class="thSticky"><div class="stickyBorder"></div>URL</th>
+								<th class="thSticky"><div class="stickyBorder"></div>Expires</th>
+								<th class="thSticky"><div class="stickyBorder"></div>Count</th>
+								<th class="thSticky"><div class="stickyBorder"></div><i class="fa fa-trash"></i></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="table-l">
-								<td>A</td>
-								<td>B</td>
-								<td>B</td>
-							</tr>
-							<tr class="table-l">
-								<td>A</td>
-								<td>Bs</td>
-								<td>Bs</td>
-							</tr>
-							<tr class="table-l">
-								<td>AA</td>
-								<td>BC</td>
-								<td>B</td>
+							<tr class="table-l" v-for="(row, i) in table.data" :key="row.id">
+								<td>{{ i+1 }}<sup>o</sup></td>
+								<td>{{ row.id }}</td>
+								<td><a :href="baseurl+'/'+row.short" target="_blank" >{{ baseurl }}/{{ row.short }}</a></td>
+								<td>{{ row.url }}</td>
+								<td>{{ row.expires }}</td>
+								<td>{{ row.count }}</td>
+								<td><i class="fa fa-trash" @click="del(row.id)"></i></td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr class="table-l">
-								<td>A</td>
-								<td>B</td>
-								<td>B</td>
-							</tr>
-						</tfoot>
 					</table>
 				</div>
 			</div>
@@ -48,6 +39,7 @@
 	import jQuery from 'jquery'
 	import DataTable from 'datatables.net';
 	import 'datatables.net-dt/css/jquery.dataTables.css'
+	import { baseurl } from './../../provider/fetch.js';
 	const $ = jQuery;
 	DataTable.$ = $;
 	$.fn.dataTable = DataTable;
@@ -59,15 +51,16 @@
 				pageLength: 14,
 				bLengthChange: false,
 				bFilter: true,
-				aaSorting: [[ 1, "asc" ]],
+				aaSorting: [[ 0, "asc" ]],
 				bInfo: false,
 				bAutoWidth: false,
 				searching: false,
 				responsive: false
-			}
+			},
+			baseurl: baseurl
 		}},
 		computed: {
-			table() { return this.$store.state.tabletop100; }
+			table() { return this.$store.state.tabletopurls; }
 		},
 		methods: {
 			startDataTb: function(id, config, table){
@@ -75,23 +68,18 @@
 				$(document).ready(function() {
 					$("table tr").hide();
 					$("table tr").each(function(index){
-						$(this).delay(index*speed).show(600);
+						$(this).delay(index*speed).show(500);
 					});
 					$('#'+id).DataTable(config);
 					return true;
 				});
 			},
 			reRenderTable(){
-				if (this.table.id == 'tophundred') {
-					this.table.id = 'tophundred_';
+				if (this.table.id == 'tabletopurls') {
+					this.table.id = 'tabletopurls_';
 				} else {
-					this.table.id = 'tophundred';
+					this.table.id = 'tabletopurls';
 				}
-			},
-			dateFormat(dt){
-				if(dt == undefined) return '-';
-				var date = dt.split('-');
-				return date[2]+'/'+date[1]+'/'+date[0];
 			}
 		},
 		created(){
@@ -108,14 +96,14 @@
 		.cv-header {
 			height: 20px;
 		}
-		#tophundred_filter, #tophundred__filter {
+		#tabletopurls_filter, #tabletopurls__filter {
 			position: relative;
 			z-index: 3;
 			margin-top: -30px;
 			right: 35%;
 			font-size: 11px;
 		}
-		#tophundred_paginate, #tophundred__paginate {
+		#tabletopurls_paginate, #tabletopurls__paginate {
 			float: left; 
 			margin-left: -5%; 
 			font-size: 75%; 
@@ -125,7 +113,7 @@
 		.page-link { padding: 6px 10px 6px 10px; color: #000; }
 	}
 	@media only screen and (max-device-width: 900px) {
-		#tophundred_filter, #tophundred__filter {
+		#tabletopurls_filter, #tabletopurls__filter {
 			display: none;
 		}
 		.cv-middle {
@@ -134,7 +122,7 @@
 	}
 	.table {
 		margin-bottom: 0;
-		border-bottom: 0px solid #ddd;
+		border-bottom: 1px solid #ddd !important;
 	}
 	.table th {
 		padding-left: 10px !important;

@@ -51,8 +51,7 @@
 				return true;
 			},
 			put(){
-				const url = this.$store.state.api_dir+'/user/recover';
-				userProvider.recoverUser(url, this.userform);
+				userProvider.recoverUser(this.userform);
 				this.$router.push('/');
 			}
 		},

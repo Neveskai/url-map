@@ -1,7 +1,7 @@
 <template>
 	<section id="app">
-		<header-vue title="URL SHORTENER"></header-vue>
 		<div id="bgapp"></div>
+		<header-vue title="URL SHORTENER"></header-vue>
 		<router-view></router-view>
 	</section>
 </template>
@@ -15,55 +15,42 @@
 		},
 		computed: {
 			id(){ return this.$store.state.user.id; },
-			table: {
-				get()	{ return this.$store.state.tablemyurls; },
-				set(obj){ this.$store.commit('updateObjAttr', { target: 'tablemyurls', data: obj, attr: 'data' }); }
-			},
-			user: {
-				get()	{ return this.$store.state.user; },
-				set(obj){ 
-					this.$store.commit('setObject', { target: 'user', data: obj });
-				}
-			},
 			sync(){ return this.$store.state.sync; }
 		},
 		watch: {
-			id: {
-				handler(id){
-					if(id != 0) this.getMyUrls(id);
-				}
-			},
 			'sync.myurls': {
 				handler(val){
-					if(val) {
-						var id = this.id;
-						this.getMyUrls(id);
-						this.$store.commit('updateObjAttr', { target: 'sync', attr: 'myurls', data: false });
-					}
+					if(val) this.getMyUrls(this.id);
+				}
+			},
+			'sync.topurls': {
+				handler(val){
+					if(val) this.getTopUrls();
 				}
 			}
 		},
 		methods: {
 			getMyUrls(id){
 				var me = this;
-				var url = me.$store.state.api_dir + '/url/myurls';
-				urlsProvider.getMyUrls(url, id).then( urls => {
-					me.table = urls;
-				})
+				urlsProvider.getMyUrls(me.$store, id);
+			},
+			getTopUrls(){
+				var me = this;
+				urlsProvider.getTopUrls(me.$store);
 			},
 			checkLogIn(){
 				var me = this;
 				var token = userProvider.getCookieToken();
 				if (!token) return false;
-				var url = me.$store.state.api_dir+'/user/token';
-				userProvider.checkLogin(url, token).then( user => {
+				userProvider.checkLogin(token).then( user => {
 					if(!user) return false;
-					return me.user = user;
+					userProvider.setUser(me.$store, user);
 				})
 			},
 		},
 		created(){
 			this.checkLogIn();
+			this.getTopUrls();
 		}
 	}
 </script>
